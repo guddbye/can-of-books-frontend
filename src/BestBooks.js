@@ -21,7 +21,7 @@ componentDidMount() {
 getBooks = async () => {
   try {
     let results = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
-    console.log(results.data);
+    // console.log(results.data);
     this.setState({
       books: results.data
     })
@@ -32,25 +32,29 @@ getBooks = async () => {
 }
   render() {
 
-    /* TODO: render all the books in a Carousel */
-console.log(this.state.books);
-let books = this.state.books.map(book => ( <p>{book.name} <br/> {book.description}</p>
-))
+    // console.log(this.state.books);
+    // let books = this.state.books.map(book => ( 
+    //   <>
+    //     <ul>Name: {this.state.books.title}</ul>
+    //     <ul>Description: {this.state.books.description}</ul>
+    //   </>
+    // ))
+    // console.log(books);
+
     return (
       <>
-        <h2>Book Shelf:</h2>
+        <h3>Book Shelf:</h3>
 
-        {this.state.books.length ?
-        {books} 
-        (
-          <p>Book Carousel coming soon</p>
-        ) : (
-          <h3>No Books Entered!(</h3>
-        )}
+        {
+        this.state.books.length ? this.state.books.map(book => (<>
+            <ul key={book._id}>Title: {book.title}</ul>
+            <ul key={book._id}>Description: {book.description}</ul>
+            <ul key={book._id}>Read: {book.read}</ul>
+         </>
+        )) : ( <ul>Book Carousel is empty!</ul> )}
       </>
     )
   }
 }
-
 
 export default BestBooks;
