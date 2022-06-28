@@ -40,7 +40,7 @@ getBooks = async () => {
         this.state.books.length ? this.state.books.map(book => (<>
             <ul key={book._id}>Title: {book.title}</ul>
             <ul key={book._id}>Description: {book.description}</ul>
-            <ul key={book._id}>Read: {book.read}</ul>
+            <ul key={book._id}>Read: {book.read ? 'I have read this book!' : 'Have not yet read!'}</ul>
          </>
         )) : ( <ul>Book Carousel is empty!</ul> )}
       </>
