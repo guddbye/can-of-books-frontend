@@ -31,16 +31,7 @@ getBooks = async () => {
 
 }
   render() {
-
-    // console.log(this.state.books);
-    // let books = this.state.books.map(book => ( 
-    //   <>
-    //     <ul>Name: {this.state.books.title}</ul>
-    //     <ul>Description: {this.state.books.description}</ul>
-    //   </>
-    // ))
-    // console.log(books);
-
+    
     return (
       <>
         <h3>Book Shelf:</h3>
