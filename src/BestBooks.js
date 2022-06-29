@@ -1,13 +1,15 @@
 import React from "react";
 import axios from "axios";
 import BookFormModal from './BookFormModal';
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, CarouselItem, Container, Form } from "react-bootstrap";
+import Carousel from 'react-bootstrap/Carousel';
 
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       books: [],
+      showModal: false,
     };
   }
 
@@ -21,26 +23,49 @@ class BestBooks extends React.Component {
     this.postBooks(newBook);
   };
 
-  // postBooks = async (newBookObj) => {
-  //   try {
-  //     let url = `${SERVER}/newBook`;
-  //     let createdBook = await axios.post(url, newBookObj);
-  //     this.getBooks;
-  //     this.setState({
-  //       books: [...this.state.books, createdBooks],
-  //     });
-  //   } catch (error) {
-  //     console.log("We have an error.", error.response.data);
-  //   }
-  // };
+  handleShowModal = () => {
+    this.setState({
+      showModal: true,
+    });
+  }
 
-  // Net effect is when the site loads,
-  // Data will be displayed.
+  handleHideModal = () => {
+    this.setState({
+      showModal: false,
+    });
+  }
+
+  postBooks = async (newBookObj) => {
+    try {
+      let url = (`${process.env.REACT_APP_SERVER}/books`)
+      let createdBook = await axios.post(url, newBookObj);
+      // this.getBooks;
+      this.setState({
+        books: [...this.state.books, createdBook.data],
+      });
+    } catch (error) {
+      console.log("We have an error.", error.response.data);
+    }
+  };
+
+  deleteBooks = async (id) => {
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/books/${id}`;
+      await axios.delete(url);
+      this.getBooks();
+      let updatedBooks = this.state.books.filter(book => book._id !== id);
+      this.setState({
+        books: updatedBooks
+      })
+    } catch (error) {
+      console.log('We have an error.', error.response.data);
+    }
+  };
+
   componentDidMount() {
     this.getBooks();
   }
 
-  /* TODO: Make a GET request to your API to fetch all the books from the database  */
   getBooks = async () => {
     try {
       let results = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
@@ -52,9 +77,37 @@ class BestBooks extends React.Component {
       console.log("We have an error: ", error.response.data);
     }
   };
+
   render() {
+// console.log(this.props.books);
+
+    let bookShelf = this.state.books.map((bookInfo) => {
+      return (
+        <Carousel.Item key={bookInfo._id}>
+          <img src="https://via.placeholder.com/150" />
+          <Carousel.Caption>
+            <p>{bookInfo.title}</p>
+            <p>Description: {bookInfo.description}</p>
+            <p>Status: {bookInfo.status}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      );
+    });
+
+console.log(bookShelf);
+
     return (
       <>
+      <br/>
+        <div class="d-flex justify-content-center">
+          <Button onClick={this.handleShowModal}>Add Book</Button>
+          
+          <Carousel>
+          {bookShelf}
+        </Carousel>
+
+        </div>
+        {/* <main>
         <h3>Book Shelf:</h3>
         {this.state.books.length ? (
           this.state.books.map((book) => (
@@ -62,9 +115,11 @@ class BestBooks extends React.Component {
               <ul key={book._id}>
                 Title: <i>{book.title}</i>
               </ul>
+
+
               <ul key={book._id}>Description: {book.description}</ul>
               <ul key={book._id}>
-                Read:{" "}
+                Read: {" "}
                 {book.read ? "I have read this book!" : "Have not yet read!"}
               </ul>
               <br />
@@ -73,29 +128,14 @@ class BestBooks extends React.Component {
         ) : (
           <ul>Book Carousel is empty!</ul>
         )}
-        <main>
-          <Container className="mt-5">
-            <Form onSubmit={this.handleBookSubmit}>
-              <Form.Group constrolId="name">
-                <Form.Label>Name </Form.Label>
-                <Form.Control type="test" />
-              </Form.Group>
-              <Form.Group constrolId="name">
-                <Form.Label>Description </Form.Label>
-                <Form.Control type="test" />
-              </Form.Group>
-              <Form.Group controlId="read">
-                <Form.Check type="checkbox" label="Read" />
-              </Form.Group>
-              <Button type="submit">New Book</Button>
-            </Form>
-          </Container>
-        </main>
+        </main> */}
+        <BookFormModal
+          hideModal={this.handleHideModal}
+          showModal={this.state.showModal}
+        />
       </>
     );
   }
 }
-
-/*  */
 
 export default BestBooks;
