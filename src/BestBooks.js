@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
-import BookFormModal from './BookFormModal';
+import BookFormModal from "./BookFormModal";
 import { Button, CarouselItem, Container, Form } from "react-bootstrap";
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from "react-bootstrap/Carousel";
+import './BestBooks.css';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class BestBooks extends React.Component {
       description: e.target.description.value,
       read: e.target.read.checked,
     };
+    console.log(newBook);
     this.postBooks(newBook);
   };
 
@@ -27,19 +29,22 @@ class BestBooks extends React.Component {
     this.setState({
       showModal: true,
     });
-  }
+  };
 
   handleHideModal = () => {
     this.setState({
       showModal: false,
     });
+  };
+
+  componentDidMount() {
+    this.getBooks();
   }
 
   postBooks = async (newBookObj) => {
     try {
-      let url = (`${process.env.REACT_APP_SERVER}/books`)
+      let url = `${process.env.REACT_APP_SERVER}/books`;
       let createdBook = await axios.post(url, newBookObj);
-      // this.getBooks;
       this.setState({
         books: [...this.state.books, createdBook.data],
       });
@@ -52,24 +57,19 @@ class BestBooks extends React.Component {
     try {
       let url = `${process.env.REACT_APP_SERVER}/books/${id}`;
       await axios.delete(url);
-      this.getBooks();
-      let updatedBooks = this.state.books.filter(book => book._id !== id);
+      let updatedBooks = this.state.books.filter((book) => book._id !== id);
       this.setState({
-        books: updatedBooks
-      })
+        books: updatedBooks,
+      });
     } catch (error) {
-      console.log('We have an error.', error.response.data);
+      console.log("We have an error.", error.response.data);
     }
   };
-
-  componentDidMount() {
-    this.getBooks();
-  }
 
   getBooks = async () => {
     try {
       let results = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
-      // console.log(results.data);
+      console.log(results.data);
       this.setState({
         books: results.data,
       });
@@ -79,62 +79,71 @@ class BestBooks extends React.Component {
   };
 
   render() {
-// console.log(this.props.books);
+    // console.log(this.props.books);
 
     let bookShelf = this.state.books.map((bookInfo) => {
       return (
         <Carousel.Item key={bookInfo._id}>
-          <img src="http://via.placeholder.com/640x360" 
-          width='500' height = '500'/>
+          <img
+            src="https://mcdn.wallpapersafari.com/medium/67/6/Rj8qwh.jpg"
+            alt="Test"
+            width="630"
+            height="360"
+          />
+
           <Carousel.Caption>
             <p>{bookInfo.title}</p>
             <p>Description: {bookInfo.description}</p>
-            <p>Status: {bookInfo.status}</p>
+            <p>
+              Status:{" "}
+              {bookInfo.status
+                ? "I have read this book!"
+                : "I have not read this yet."}
+            </p>
+
+            {/* <Form onSubmit={this.deleteBooks}>
+            <Form.Group id="delete">
+            </Form.Group>
+            <Button type="submit" variant="dark" onClick={() => this.state.deleteBooks(bookInfo._id)}> 
+            Delete Book</Button>
+          </Form> */}
+
+            <Button
+              type="submit"
+              variant="dark"
+              onClick={() => this.deleteBooks(bookInfo._id)}
+            >
+              Delete Book
+            </Button>
+
+            <Button
+              id="update"
+              variant="dark"
+              onClick={() => this.deleteBooks(bookInfo._id)}
+            >
+              {" "}
+              Update Book
+            </Button>
           </Carousel.Caption>
         </Carousel.Item>
       );
     });
 
-console.log(bookShelf);
+    console.log(bookShelf);
 
     return (
-      <>
-      <br/>
-        <div class="d-flex justify-content-center">
-          <Button onClick={this.handleShowModal}>Add Book</Button>
-          
-          <Carousel>
-          {bookShelf}
-        </Carousel>
-
-        </div>
-        {/* <main>
-        <h3>Book Shelf:</h3>
-        {this.state.books.length ? (
-          this.state.books.map((book) => (
-            <>
-              <ul key={book._id}>
-                Title: <i>{book.title}</i>
-              </ul>
-
-
-              <ul key={book._id}>Description: {book.description}</ul>
-              <ul key={book._id}>
-                Read: {" "}
-                {book.read ? "I have read this book!" : "Have not yet read!"}
-              </ul>
-              <br />
-            </>
-          ))
-        ) : (
-          <ul>Book Carousel is empty!</ul>
-        )}
-        </main> */}
+      <div id='bestBooksDiv'>
+        <br />
         <BookFormModal
           hideModal={this.handleHideModal}
           showModal={this.state.showModal}
+          addBook={this.handleBookSubmit}
         />
-      </>
+        <Button variant="dark" id="add" onClick={this.handleShowModal}>
+          Add Book
+        </Button>
+        <Carousel variant="dark">{bookShelf}</Carousel>
+      </div>
     );
   }
 }

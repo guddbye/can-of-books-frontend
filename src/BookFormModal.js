@@ -17,19 +17,19 @@ class BookFormModal extends React.Component {
 
       <Modal.Body>
       <Container className="mt-5">
-        <Form onSubmit={this.handleBookSubmit}>
-          <Form.Group constrolId="name">
+        <Form onSubmit={this.props.addBook}>
+          <Form.Group controlId="name">
             <Form.Label>Name </Form.Label>
             <Form.Control type="test" />
           </Form.Group>
-          <Form.Group constrolId="name">
+          <Form.Group controlId="description">
             <Form.Label>Description </Form.Label>
             <Form.Control type="test" />
           </Form.Group>
           <Form.Group controlId="read">
             <Form.Check type="checkbox" label="Read" />
           </Form.Group>
-          <div class="d-flex justify-content-center">
+          <div className="d-flex justify-content-center">
           <Button type="submit">New Book</Button></div>
         </Form>
       </Container>
