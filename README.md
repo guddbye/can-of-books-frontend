@@ -1,7 +1,7 @@
 # Can of Books
 
 **Authors**: Scottie Houghton & Brentice Loper
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.1 
 
 ## Overview
 * Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next.
@@ -19,6 +19,7 @@
 
 ## Change Log
 * 06-27-2022 9:30pm - Application has a GET route to our server which is pulling data from our database. It renders the data from the database onto our page.
+* 06-28-2022 2:00PM - Added an 'Add Book' button to the website, edited the code for the About Me, and added a Carousel with an image. 
 
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
@@ -33,8 +34,8 @@
 
 Estimate of time needed to complete: 4 hours
 
-Start time: 4:00pm
+Start time: 2:00PM
 
-Finish time: 9:30pm
+Finish time: 8:00PM
 
-Actual time needed to complete: 5.5 hours
+Actual time needed to complete: 5 hours
