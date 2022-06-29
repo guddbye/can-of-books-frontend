@@ -84,7 +84,8 @@ class BestBooks extends React.Component {
     let bookShelf = this.state.books.map((bookInfo) => {
       return (
         <Carousel.Item key={bookInfo._id}>
-          <img src="https://via.placeholder.com/150" />
+          <img src="http://via.placeholder.com/640x360" 
+          width='500' height = '500'/>
           <Carousel.Caption>
             <p>{bookInfo.title}</p>
             <p>Description: {bookInfo.description}</p>
