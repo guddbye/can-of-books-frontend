@@ -30,7 +30,7 @@
 
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-## Lab: Class 11 - Building CRUD apps with MongoDB
+## Lab: Class 12 - Resource Create and Delete
 
 Estimate of time needed to complete: 4 hours
 
