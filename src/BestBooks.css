@@ -1,3 +1,10 @@
-.button {
-  background-color: #555555;
+body {
+  background-color: #fdebeb;
+}
+
+#bestBooksDiv {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
