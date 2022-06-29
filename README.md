@@ -30,12 +30,22 @@
 
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-## Lab: Class 12 - Resource Create and Delete
+## Lab: Class 11 - Building CRUD apps with MongoDB
 
 Estimate of time needed to complete: 4 hours
 
-Start time: 2:00PM
+Start time: 4:00pm
 
-Finish time: 8:00PM
+Finish time: 9:30pm
 
-Actual time needed to complete: 5 hours
+Actual time needed to complete: 5.5 hours
+
+## Lab: Class 12 - Building CRUD apps with MongoDB
+
+Estimate of time needed to complete: 5 hours
+
+Start time: 2:00pm
+
+Finish time: 8:45pm
+
+Actual time needed to complete: 6.75 hours
