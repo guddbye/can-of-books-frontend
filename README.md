@@ -20,6 +20,7 @@
 ## Change Log
 * 06-27-2022 9:30pm - Application has a GET route to our server which is pulling data from our database. It renders the data from the database onto our page.
 * 06-28-2022 2:00PM - Added an 'Add Book' button to the website, edited the code for the About Me, and added a Carousel with an image. 
+* 06-29-2022 4:00PM - Added, updated, and fixed the Add, Delete, and Update buttons. Centered and made code pretty. 
 
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
@@ -30,12 +31,21 @@
 
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-## Lab: Class 12 - Resource Create and Delete
 
+## Lab: Class 11 - Building CRUD apps with MongoDB
 Estimate of time needed to complete: 4 hours
+Start time: 4:00pm
+Finish time: 9:30pm
+Actual time needed to complete: 5.5 hours
 
-Start time: 2:00PM
+## Lab: Class 12 - Building CRUD apps with MongoDB
+Estimate of time needed to complete: 5 hours
+Start time: 2:00pm
+Finish time: 9:00pm
+Actual time needed to complete: 7 hours
 
-Finish time: 8:00PM
-
-Actual time needed to complete: 5 hours
+## Lab: Class 13 - Update a Resource
+Estimate of time needed to complete: 3 hours
+Start time: 5:00pm
+Finish time: 9:00pm
+Actual time needed to complete: 4 hours
