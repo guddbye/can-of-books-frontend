@@ -4,6 +4,7 @@ import BookFormModal from "./BookFormModal";
 import { Button, CarouselItem, Container, Form } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import './BestBooks.css';
+// import UpdateBookForm from './UpdateBookForm';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -12,6 +13,17 @@ class BestBooks extends React.Component {
       books: [],
       showModal: false,
     };
+  }
+
+  handleSubmit = (e) => {
+    let bookToUpdate = {
+      title: e.target.title.value || this.props.book.title,
+      description: e.target.description.value || this.props.book.description,
+      status: e.target.status.value || this.props.book.status,
+      _id: this.props.book._id,
+      __v: this.props.book.__v
+    }
+    this.props.updateBooks(bookToUpdate)
   }
 
   handleBookSubmit = (e) => {
@@ -101,13 +113,6 @@ class BestBooks extends React.Component {
                 : "I have not read this yet."}
             </p>
 
-            {/* <Form onSubmit={this.deleteBooks}>
-            <Form.Group id="delete">
-            </Form.Group>
-            <Button type="submit" variant="dark" onClick={() => this.state.deleteBooks(bookInfo._id)}> 
-            Delete Book</Button>
-          </Form> */}
-
             <Button
               type="submit"
               variant="dark"
@@ -117,11 +122,12 @@ class BestBooks extends React.Component {
             </Button>
 
             <Button
-              id="update"
+              id="updateButton"
               variant="dark"
-              onClick={() => this.deleteBooks(bookInfo._id)}
+              onClick={() =>
+                this.updateBookForm({ showUpdateForm: true, bookUpdate: bookInfo })
+              }
             >
-              {" "}
               Update Book
             </Button>
           </Carousel.Caption>
