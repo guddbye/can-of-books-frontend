@@ -4,6 +4,7 @@ import BookFormModal from "./BookFormModal";
 import { Button, CarouselItem, Container, Form } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import './BestBooks.css';
+import UpdateBookForm from "./UpdateBookForm";
 // import UpdateBookForm from './UpdateBookForm';
 
 class BestBooks extends React.Component {
@@ -12,6 +13,7 @@ class BestBooks extends React.Component {
     this.state = {
       books: [],
       showModal: false,
+      showUpdateForm: false
     };
   }
 
@@ -78,6 +80,23 @@ class BestBooks extends React.Component {
     }
   };
 
+  updateBooks = async (bookToUpdate) => {
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/books/${bookToUpdate._id}`;
+      let updatedBook = await axios.put(url, bookToUpdate);
+      let updatedBookArray = this.state.books.map(existingBook => {
+        return existingBook._id === bookToUpdate._id
+          ? updatedBook.data
+          : existingBook
+      });
+      this.setState({
+        books: updatedBookArray
+      });
+    } catch(error) {
+      console.log("We have an error: ", error.response.data);
+    }
+  }
+
   getBooks = async () => {
     try {
       let results = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
@@ -124,6 +143,7 @@ class BestBooks extends React.Component {
             <Button
               id="updateButton"
               variant="dark"
+              // onClick={() => this.setState({ showUpdateForm: true })}
               onClick={() =>
                 this.updateBookForm({ showUpdateForm: true, bookUpdate: bookInfo })
               }
@@ -135,7 +155,9 @@ class BestBooks extends React.Component {
       );
     });
 
-    console.log(bookShelf);
+    // console.log(bookShelf);
+    // this.state.showUpdateForm && <UpdateBookForm />
+
 
     return (
       <div id='bestBooksDiv'>
